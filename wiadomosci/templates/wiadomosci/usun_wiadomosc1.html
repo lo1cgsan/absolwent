@@ -1,0 +1,29 @@
+{% extends 'szablon.html' %}
+{% block tytul %}Absolwent – Usuwanie wiadomości{% endblock %}
+{% block h1 %}Absolwent – Usuwanie wiadomości{% endblock %}
+{% block tresc %}
+    <div class="w-100 bg-primary rounded p-4">
+        {% if perms.wiadomosci.delete_wiadomosc %}
+        <div class="w-100 bg-light rounded p-4">
+        <form method="post">
+            <p class="lead">Na pewno chcesz usunąć wiadomość:<br><i>{{ wiadomosc.tresc }}</i><br>({{ wiadomosc.data_d }})?</p>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-secondary">Usuń</button>
+        </form>
+        </div>
+        {% else %}
+            <div class="well">Nie możesz usuwać wiadomości!</div>
+        {% endif %}
+        <div class="card mt-3">
+            <h4 class="pl-3 pt-3">Moje wiadomości</h4>
+            <div class="card-body py-1">
+            <ul>
+            {% for w in wiadomosci %}
+                <li>{{ w.tresc }} ({{ w.data_d }})</li>
+            {% endfor %}
+            </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

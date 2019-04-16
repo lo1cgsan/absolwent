@@ -1,0 +1,31 @@
+{% extends 'szablon.html' %}
+{% block tytul %}Absolwent – Usuwanie{% endblock %}
+{% block h1 %}Absolwent – Usuwanie{% endblock %}
+{% block tresc %}
+    <div class="w-100 bg-primary rounded p-4">
+        {% if perms.osoby.delete_absolwent %}
+        <div class="w-100 bg-light rounded p-4">
+        <form method="post">
+            <p class="lead">Na pewno chcesz usunąć absolwenta:<br>
+                <i>{{ absolwent }}</i> ({{ absolwent.klasa.nazwa }}, {{ absolwent.klasa.rok_matury }})?
+            </p>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-secondary">Usuń</button>
+        </form>
+        </div>
+        {% else %}
+            <div class="well">Nie możesz usuwać absolwentów!</div>
+        {% endif %}
+        <div class="card mt-3">
+            <h4 class="pl-3 pt-3">Absolwenci</h4>
+            <div class="card-body py-1">
+            <ul>
+            {% for o in absolwenci %}
+                <li><span class="lead">{{ o }}, klasa {{ o.klasa.nazwa }}</span> ({{ o.klasa.rok_matury }})</li>
+            {% endfor %}
+            </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

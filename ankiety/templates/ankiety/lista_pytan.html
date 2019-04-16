@@ -1,0 +1,19 @@
+{% extends 'szablon.html' %}
+
+{% block tresc %}
+    <div class="w-100 bg-primary rounded p-4">
+        <h2 class="section-heading mb-4">
+            <span class="section-heading-upper">Nasze</span>
+            <span class="section-heading-lower">Pytania</span>
+        </h2>
+        <ul>
+        {% for p in pytania %}
+        <li class="mb-1">
+            <span class="lead">{{ p }} </span> <a href="{% url 'ankiety:pytanie-glosuj' p.id %}" class="btn btn-secondary btn-sm">Głosuj</a>
+            <br>
+            <span class="float-right">(kategoria: {{ p.kategoria.nazwa }})</span>
+        </li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

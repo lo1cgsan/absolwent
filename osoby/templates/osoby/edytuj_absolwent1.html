@@ -1,0 +1,29 @@
+{% extends 'szablon.html' %}
+{% block tytul %}Absolwent – Edycja{% endblock %}
+{% block h1 %}Absolwent – Edycja{% endblock %}
+{% block tresc %}
+    <div class="w-100 bg-primary rounded p-4">
+        <h2 class="section-heading mb-4">
+            <span class="section-heading-upper">Absolwent</span>
+            <span class="section-heading-lower">Klasa</span>
+        </h2>
+        {% if perms.osoby.change_absolwent %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-secondary">Zapisz</button>
+        </form>
+        {% else %}
+            <div class="well">Nie możesz edytować absolwentów!</div>
+        {% endif %}
+
+        <h3 class="mt-4">Absolwenci</h3>
+        <ul>
+        {% for o in absolwenci %}
+        <li class="mb-1">
+            <span class="lead">{{ o }}, klasa {{ o.klasa.nazwa }}</span> ({{ o.klasa.rok_matury }})
+        </li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

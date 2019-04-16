@@ -1,0 +1,18 @@
+{% extends 'szablon.html' %}
+{% block tytul %}Absolwent – Usuwanie wiadomości{% endblock %}
+{% block h1 %}Absolwent – Usuwanie wiadomości{% endblock %}
+{% block tresc %}
+    <div class="w-100 bg-primary rounded p-4">
+        <div class="w-100 bg-light rounded p-4">
+            <form method="post">
+            <p class="lead">Na pewno chcesz usunąć wiadomość:<br>
+                <i>{{ object.tresc }}</i><br>
+                ({{ object.data_d }})?
+            </p>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-secondary">Usuń</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

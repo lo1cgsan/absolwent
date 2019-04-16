@@ -1,0 +1,23 @@
+{% extends 'szablon.html' %}
+
+{% block tresc %}
+    <div class="w-100 bg-primary rounded p-4">
+        <h2 class="section-heading mb-4">
+            <span class="section-heading-upper">Nasi</span>
+            <span class="section-heading-lower">Absolwenci</span>
+        </h2>
+        <ul>
+        {% for o in osoby %}
+        <li class="mb-1">
+            <span class="lead">{{ o }}, klasa {{ o.klasa.nazwa }}</span> ({{ o.klasa.rok_matury }})
+            {% if perms.osoby.delete_absolwent %}
+                <a href="{% url 'osoby:edytuj-absolwent' o.id %}" class="btn btn-secondary btn-sm">Edytuj</a>&nbsp;
+                {% if user != o.user %}&nbsp;
+                    <a href="{% url 'osoby:usun-absolwent' o.id %}" class="btn btn-secondary btn-sm">Usuń</a>
+                {% endif %}
+            {% endif %}
+        </li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

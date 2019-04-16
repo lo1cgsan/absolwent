@@ -1,0 +1,22 @@
+{% extends 'szablon.html' %}
+{% block tytul %}Absolwent – Rejestracja{% endblock %}
+{% block h1 %}Absolwent – Rejestracja{% endblock %}
+{% block tresc %}
+    {% load crispy_forms_tags %}
+
+    <div class="w-100 bg-primary rounded p-4">
+        <h2 class="section-heading mb-4">
+            <span class="section-heading-upper">Twoje konto</span>
+            <span class="section-heading-lower">Rejestracja użytkownika</span>
+        </h2>
+        {% if user.is_authenticated %}
+            <p>Jesteś już zarejestrowany jako {{ user.username }}.</p>
+        {% else %}
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-secondary">Zarejestruj</button>
+        </form>
+        {% endif %}
+    </div>
+{% endblock %}
